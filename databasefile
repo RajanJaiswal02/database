@@ -1,0 +1,471 @@
+USE [master]
+GO
+/****** Object:  Database [WorklogDB]    Script Date: 7/6/2022 1:08:51 PM ******/
+CREATE DATABASE [WorklogDB]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'WorklogDB', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\WorklogDB.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'WorklogDB_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\WorklogDB_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT
+GO
+ALTER DATABASE [WorklogDB] SET COMPATIBILITY_LEVEL = 150
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [WorklogDB].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [WorklogDB] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [WorklogDB] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [WorklogDB] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [WorklogDB] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [WorklogDB] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [WorklogDB] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [WorklogDB] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [WorklogDB] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [WorklogDB] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [WorklogDB] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [WorklogDB] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [WorklogDB] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [WorklogDB] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [WorklogDB] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [WorklogDB] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [WorklogDB] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [WorklogDB] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [WorklogDB] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [WorklogDB] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [WorklogDB] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [WorklogDB] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [WorklogDB] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [WorklogDB] SET RECOVERY FULL 
+GO
+ALTER DATABASE [WorklogDB] SET  MULTI_USER 
+GO
+ALTER DATABASE [WorklogDB] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [WorklogDB] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [WorklogDB] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [WorklogDB] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [WorklogDB] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [WorklogDB] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'WorklogDB', N'ON'
+GO
+ALTER DATABASE [WorklogDB] SET QUERY_STORE = OFF
+GO
+USE [WorklogDB]
+GO
+/****** Object:  Table [dbo].[AspNetRoleClaims]    Script Date: 7/6/2022 1:08:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AspNetRoleClaims](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[RoleId] [nvarchar](450) NOT NULL,
+	[ClaimType] [nvarchar](max) NULL,
+	[ClaimValue] [nvarchar](max) NULL,
+ CONSTRAINT [PK_AspNetRoleClaims] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[AspNetRoles]    Script Date: 7/6/2022 1:08:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AspNetRoles](
+	[Id] [nvarchar](450) NOT NULL,
+	[Name] [nvarchar](256) NULL,
+	[NormalizedName] [nvarchar](256) NULL,
+	[ConcurrencyStamp] [nvarchar](max) NULL,
+ CONSTRAINT [PK_AspNetRoles] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[AspNetUserClaims]    Script Date: 7/6/2022 1:08:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AspNetUserClaims](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [nvarchar](450) NOT NULL,
+	[ClaimType] [nvarchar](max) NULL,
+	[ClaimValue] [nvarchar](max) NULL,
+ CONSTRAINT [PK_AspNetUserClaims] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[AspNetUserLogins]    Script Date: 7/6/2022 1:08:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AspNetUserLogins](
+	[LoginProvider] [nvarchar](450) NOT NULL,
+	[ProviderKey] [nvarchar](450) NOT NULL,
+	[ProviderDisplayName] [nvarchar](max) NULL,
+	[UserId] [nvarchar](450) NOT NULL,
+ CONSTRAINT [PK_AspNetUserLogins] PRIMARY KEY CLUSTERED 
+(
+	[LoginProvider] ASC,
+	[ProviderKey] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[AspNetUserRoles]    Script Date: 7/6/2022 1:08:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AspNetUserRoles](
+	[UserId] [nvarchar](450) NOT NULL,
+	[RoleId] [nvarchar](450) NOT NULL,
+ CONSTRAINT [PK_AspNetUserRoles] PRIMARY KEY CLUSTERED 
+(
+	[UserId] ASC,
+	[RoleId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[AspNetUsers]    Script Date: 7/6/2022 1:08:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AspNetUsers](
+	[Id] [nvarchar](450) NOT NULL,
+	[UserName] [nvarchar](256) NULL,
+	[NormalizedUserName] [nvarchar](256) NULL,
+	[Email] [nvarchar](256) NULL,
+	[NormalizedEmail] [nvarchar](256) NULL,
+	[EmailConfirmed] [bit] NOT NULL,
+	[PasswordHash] [nvarchar](max) NULL,
+	[SecurityStamp] [nvarchar](max) NULL,
+	[ConcurrencyStamp] [nvarchar](max) NULL,
+	[PhoneNumber] [nvarchar](max) NULL,
+	[PhoneNumberConfirmed] [bit] NOT NULL,
+	[TwoFactorEnabled] [bit] NOT NULL,
+	[LockoutEnd] [datetimeoffset](7) NULL,
+	[LockoutEnabled] [bit] NOT NULL,
+	[AccessFailedCount] [int] NOT NULL,
+ CONSTRAINT [PK_AspNetUsers] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[AspNetUserTokens]    Script Date: 7/6/2022 1:08:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AspNetUserTokens](
+	[UserId] [nvarchar](450) NOT NULL,
+	[LoginProvider] [nvarchar](450) NOT NULL,
+	[Name] [nvarchar](450) NOT NULL,
+	[Value] [nvarchar](max) NULL,
+ CONSTRAINT [PK_AspNetUserTokens] PRIMARY KEY CLUSTERED 
+(
+	[UserId] ASC,
+	[LoginProvider] ASC,
+	[Name] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[locations]    Script Date: 7/6/2022 1:08:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[locations](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](250) NULL,
+	[Descriptions] [varchar](250) NULL,
+ CONSTRAINT [PK_location] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Projects]    Script Date: 7/6/2022 1:08:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Projects](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](max) NULL,
+	[Description] [nvarchar](max) NULL,
+	[Status] [nvarchar](max) NULL,
+	[StartTime] [datetime] NULL,
+	[Manager] [nvarchar](max) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[roles]    Script Date: 7/6/2022 1:08:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[roles](
+	[Id] [int] NOT NULL,
+	[Name] [nvarchar](max) NULL,
+ CONSTRAINT [PK_roles] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[UserDetails]    Script Date: 7/6/2022 1:08:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[UserDetails](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[FullName] [varchar](200) NOT NULL,
+	[PhoneNumber] [varchar](100) NOT NULL,
+	[Email] [varchar](200) NOT NULL,
+	[Comment] [varchar](2000) NULL,
+	[UserId] [nvarchar](450) NOT NULL,
+	[DateofBirth] [datetime2](7) NULL,
+	[ImagePath] [nvarchar](max) NULL,
+	[Gender] [int] NULL,
+	[ForgetPasswordCode] [nvarchar](max) NULL,
+	[ForgetPasswordCodeExpirtyDate] [datetime2](7) NULL,
+	[Status] [int] NULL,
+	[Address] [nvarchar](max) NULL,
+ CONSTRAINT [PK_UserDetails] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[WorkLogs]    Script Date: 7/6/2022 1:08:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[WorkLogs](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Project_Id] [int] NULL,
+	[Work_Id] [int] NULL,
+	[Start_date] [datetime2](7) NULL,
+	[End_date] [datetime2](7) NULL,
+	[Create_date] [datetime2](7) NULL,
+	[Comments] [nvarchar](max) NULL,
+	[UserDetail_Id] [bigint] NULL,
+	[Location_Id] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Works]    Script Date: 7/6/2022 1:08:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Works](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Task_Name] [nvarchar](max) NULL,
+	[Description] [nvarchar](max) NULL,
+	[ProjectId] [int] NULL,
+	[StaffId] [bigint] NULL,
+	[StartTime] [datetime] NULL,
+	[Create_Date] [datetime2](7) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+INSERT [dbo].[AspNetRoles] ([Id], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (N'1964621e-f8c0-4dba-a774-840d5e0e7e1e', N'EMPLOYEE', N'EMPLOYEE', N'12/23/2021 10:03:09 PM')
+INSERT [dbo].[AspNetRoles] ([Id], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (N'1e78b851-cda9-41ae-bfde-08b5e03d3318', N'ADMINISTRATOR', N'ADMINISTRATOR', N'12/23/2021 10:03:09 PM')
+GO
+INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'191f0830-36b1-4839-b119-7d77407cd571', N'1964621e-f8c0-4dba-a774-840d5e0e7e1e')
+INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'2833fd27-fc87-4530-b8bb-bbf518fcc63b', N'1964621e-f8c0-4dba-a774-840d5e0e7e1e')
+INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'28b65675-11e7-48d8-89c7-958963d12581', N'1964621e-f8c0-4dba-a774-840d5e0e7e1e')
+INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'315f9427-8ddd-469a-b583-7079bf30365e', N'1964621e-f8c0-4dba-a774-840d5e0e7e1e')
+INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'3ef2cc42-4228-40d6-80a8-35057e681b39', N'1964621e-f8c0-4dba-a774-840d5e0e7e1e')
+INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'3f0fbde7-8db0-480c-b9f5-62c1dfa25418', N'1964621e-f8c0-4dba-a774-840d5e0e7e1e')
+INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'5d0f0d41-8edd-4555-aa20-9212c204a861', N'1964621e-f8c0-4dba-a774-840d5e0e7e1e')
+INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'705fa4be-11dd-4a0f-b6cc-7eaa011013c1', N'1e78b851-cda9-41ae-bfde-08b5e03d3318')
+INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'84d09814-a9ff-4e76-9de1-0ab0c5ef8269', N'1964621e-f8c0-4dba-a774-840d5e0e7e1e')
+INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'9aa66646-c46a-4bca-a8ad-6af9710c1e03', N'1964621e-f8c0-4dba-a774-840d5e0e7e1e')
+INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'c73b2f4f-619a-4eee-ab9d-8893ce7f0b4a', N'1964621e-f8c0-4dba-a774-840d5e0e7e1e')
+INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'ce942cd8-e683-4909-9815-ca108f3ca1ea', N'1964621e-f8c0-4dba-a774-840d5e0e7e1e')
+INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'e4c70982-ae4a-466c-bb13-5bc9c6a56d84', N'1964621e-f8c0-4dba-a774-840d5e0e7e1e')
+INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'fafe57f0-a730-47ab-b2e8-0a671e8e165d', N'1964621e-f8c0-4dba-a774-840d5e0e7e1e')
+GO
+INSERT [dbo].[AspNetUsers] ([Id], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'191f0830-36b1-4839-b119-7d77407cd571', N'shah664@gmail.com', N'SHAH664@GMAIL.COM', N'shah664@gmail.com', N'SHAH664@GMAIL.COM', 1, N'AQAAAAEAACcQAAAAEFXSW6J7dJstoRZpILoHclcTc+kcA4qykWTYSj0jgQF8R3uHRJWgHE13IzfnEIF54Q==', N'CW2ZKUXXFPQXIT7NI3GQNM6PETCUELXP', N'9c022747-e090-4b13-97c2-bf142769d32e', N'980001230', 0, 0, NULL, 1, 0)
+INSERT [dbo].[AspNetUsers] ([Id], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'2833fd27-fc87-4530-b8bb-bbf518fcc63b', N'guddumandal9533@gmail.com', N'GUDDUMANDAL9533@GMAIL.COM', N'guddumandal9533@gmail.com', N'GUDDUMANDAL9533@GMAIL.COM', 1, N'AQAAAAEAACcQAAAAEL/UgOY53h7s1U4B/LYsJF++xLTGNA/Wo7627eIc70JKo4fYsgUxiIMT8LYTVaV8YA==', N'RJHP7GEIFIZ6GEKPVR2LUD7VJRH4GDXW', N'55250390-b694-43de-b501-9df9992a7bb3', N'9818649533', 0, 0, NULL, 1, 0)
+INSERT [dbo].[AspNetUsers] ([Id], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'28b65675-11e7-48d8-89c7-958963d12581', N'mandal20551@gmail.com', N'MANDAL20551@GMAIL.COM', N'mandal20551@gmail.com', N'MANDAL20551@GMAIL.COM', 0, N'AQAAAAEAACcQAAAAEBR9Yl1LGtcp5rB/bRbUw+7+Vim7OkOvvO4MQ8NX9lwgHgsaBN3K8VFZmyszZM6f7A==', N'BIIWSZ4WQZXKEIUSVSCCYFOZTATVRDKP', N'e1a0c8e8-a674-4e02-81b2-15172b0e9e1b', NULL, 0, 0, NULL, 1, 0)
+INSERT [dbo].[AspNetUsers] ([Id], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'315f9427-8ddd-469a-b583-7079bf30365e', N'dev12345@gmail.com', N'DEV12345@GMAIL.COM', N'dev12345@gmail.com', N'DEV12345@GMAIL.COM', 1, N'AQAAAAEAACcQAAAAEFcJzmAdcb/LJY+R9WWyhZv4X4qeLrDtKaopaCJRgQWF+/HAl1AwFxE/JrjZTm842w==', N'UJI7FDOIY74W7WWLNPNFQQGMVGREB5IG', N'ed523cc1-c0a3-4677-a77b-61288f08784e', N'9818654995', 0, 0, NULL, 1, 0)
+INSERT [dbo].[AspNetUsers] ([Id], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'3ef2cc42-4228-40d6-80a8-35057e681b39', N'Tes2999@gmail.com', N'TES2999@GMAIL.COM', N'Tes2999@gmail.com', N'TES2999@GMAIL.COM', 1, N'AQAAAAEAACcQAAAAENKRSqrpXJXRN9r16JV1+KynRjAnSSfyRbKAgA1PC3FnXEuz0ZUutww8JdsHE8QkIQ==', N'RYHGAZBH5YFHEFJ5QF7BLBUDOMXXGVCV', N'e82113fb-24d0-4651-9e48-46a92c0cfdd2', N'555555555', 0, 0, NULL, 1, 0)
+INSERT [dbo].[AspNetUsers] ([Id], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'3f0fbde7-8db0-480c-b9f5-62c1dfa25418', N'stark123@gmail.com', N'STARK123@GMAIL.COM', N'stark123@gmail.com', N'STARK123@GMAIL.COM', 1, N'AQAAAAEAACcQAAAAEKc4RmTfGL5Xgg6CBp+75ndmGOXIoBfmTbptgJbdgHyrXCSY7WLpbrBoXIIb2f7LPw==', N'77GQ6KQPOO4EFF7ZDAFE4JSSMUHKSMHV', N'c9e8dd00-68e6-41db-862d-fcd379dbbd14', N'2222222222222222222', 0, 0, NULL, 1, 0)
+INSERT [dbo].[AspNetUsers] ([Id], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'5d0f0d41-8edd-4555-aa20-9212c204a861', N'jswl4567@gmail.com', N'JSWL4567@GMAIL.COM', N'jswl4567@gmail.com', N'JSWL4567@GMAIL.COM', 1, N'AQAAAAEAACcQAAAAEK0Sh92VbmUPYYXRWxkaAsKNmuPe6NBjAs9XrejgzuY+HPcIfEsgetkfWS/CWZEO7w==', N'ZX6AJE74362NS5MV6BJRNUA5VLQS2LD4', N'b40afe36-2991-4bb5-b244-ddf34916f2a9', N'string', 0, 0, NULL, 1, 0)
+INSERT [dbo].[AspNetUsers] ([Id], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'705fa4be-11dd-4a0f-b6cc-7eaa011013c1', N'pravakarj@gmail.com', N'PRAVAKARJ@GMAIL.COM', N'pravakarj@gmail.com', N'PRAVAKARJ@GMAIL.COM', 0, N'AQAAAAEAACcQAAAAELkhs89+PSbHIrv7Bo0SZXIYWqMM3PULpN8r8aaROVRgS0BMKQ9V5QDTC0v6z0PdpQ==', N'PSECHZQ6VLM7VGYYF5MIHKGCNNXCBE4L', N'057e6463-ed39-491e-87ae-b27daf4343ce', NULL, 0, 0, NULL, 1, 0)
+INSERT [dbo].[AspNetUsers] ([Id], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'84d09814-a9ff-4e76-9de1-0ab0c5ef8269', N'Guddu2055@gmail.com', N'GUDDU2055@GMAIL.COM', N'Guddu2055@gmail.com', N'GUDDU2055@GMAIL.COM', 0, N'AQAAAAEAACcQAAAAECiFi3hHT5EuBsxU70lDUagUnT00BKP48jkNPguBGQTpam5BfkhZY3eBDmbJRKvK4g==', N'I57OT6AVCFZN6QQ63LWFPXFSGYUHVAKL', N'afec095c-30d8-4c71-9d08-955135dcb490', N'9818649533', 0, 0, NULL, 1, 0)
+INSERT [dbo].[AspNetUsers] ([Id], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'9aa66646-c46a-4bca-a8ad-6af9710c1e03', N'test123@gmail.com', N'TEST123@GMAIL.COM', N'test123@gmail.com', N'TEST123@GMAIL.COM', 1, N'AQAAAAEAACcQAAAAEI/h9600Y4mjH6hECaHZz9XzERHChD2PO83o3JIhOkBzG+EFjgag+sVbA/3EO2+jEw==', N'X2HWUIJBMWHUBO76JLKOKV5FSYK6LY5P', N'78006eeb-78eb-469d-8f21-f7a6388b3bda', N'9852613476', 0, 0, NULL, 1, 0)
+INSERT [dbo].[AspNetUsers] ([Id], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'a43db656-fab0-44e1-93b9-3bd9132cbcca', N'mandal2055@gmail.com', N'MANDAL2055@GMAIL.COM', N'mandal2055@gmail.com', N'MANDAL2055@GMAIL.COM', 0, N'AQAAAAEAACcQAAAAEGmD53liMvK/mlUPcKvzUaRjEYHkEZ/tOX1ukAMKfXPCzxjatmhwxwOe/CjuKV7xIg==', N'ZBR6QGRODXN5NVNEEG4FVOLHC2BJJJ5O', N'df4b3587-70a2-4b52-b228-7bb7b82a3d10', NULL, 0, 0, NULL, 1, 0)
+INSERT [dbo].[AspNetUsers] ([Id], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'c73b2f4f-619a-4eee-ab9d-8893ce7f0b4a', N'Guddumandal2055@gmail.com', N'GUDDUMANDAL2055@GMAIL.COM', N'Guddumandal2055@gmail.com', N'GUDDUMANDAL2055@GMAIL.COM', 1, N'AQAAAAEAACcQAAAAEDajQWdPtFwVJUwIdRMj/1pGScrNrmxeKRUc1tYlWGEEPO8Pd8p/PfBR9jppUhygmQ==', N'K5RQJJGJQYGRAQ6NI2IRAVSBVUMELKH2', N'38680e6f-2b2c-4831-950d-58a069ba11d8', N'9818654995', 0, 0, NULL, 1, 0)
+INSERT [dbo].[AspNetUsers] ([Id], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'ce942cd8-e683-4909-9815-ca108f3ca1ea', N'ritesh234@gmail.com', N'RITESH234@GMAIL.COM', N'ritesh234@gmail.com', N'RITESH234@GMAIL.COM', 1, N'AQAAAAEAACcQAAAAEIM79tcHOUBx+gELwZNq9GrmxUBDz7KYCD7ELcm3uP2IhO61IcouMS7eLbWxJPuMOw==', N'A35JZX65LQUKQSOOWRWNQPV67ZAB6BCG', N'8cebeaad-a3d0-4391-a383-c28b2b6bb42e', N'99999999099999', 0, 0, NULL, 1, 0)
+INSERT [dbo].[AspNetUsers] ([Id], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'e4c70982-ae4a-466c-bb13-5bc9c6a56d84', N'sharma34gmail.com', N'SHARMA34GMAIL.COM', N'sharma34gmail.com', N'SHARMA34GMAIL.COM', 1, N'AQAAAAEAACcQAAAAEMmg3wHCNvz9f2XLloZAWhLc2SgEQ59st/A8agGOwsyVzfu3NnpQfUTojrkHNkF1vA==', N'EHMMKOUEIICNTQGF7ESK6UKV3UTO7U6N', N'56f4a7d5-3952-4bf2-b37b-161672ac6059', N'225500000000000', 0, 0, NULL, 1, 0)
+INSERT [dbo].[AspNetUsers] ([Id], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'f8020807-3f08-4245-a5e9-eb87ebf44a92', N'Mandal20055@gmail.com', N'MANDAL20055@GMAIL.COM', N'Mandal20055@gmail.com', N'MANDAL20055@GMAIL.COM', 0, N'AQAAAAEAACcQAAAAELCvbY1aOUOVD2Gr+Z0fZ06Rycq7oCGtSQIA2KNBx0Kk6CKlW9UgT9Fa6JS+9KtcGA==', N'DNKAI2NFAH6G6PEAJQPHLHZOHDAUGHWV', N'2728a2af-4d14-4841-a3fc-67eba38a8524', NULL, 0, 0, NULL, 1, 0)
+INSERT [dbo].[AspNetUsers] ([Id], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'fafe57f0-a730-47ab-b2e8-0a671e8e165d', N'test12345@gmail.com', N'TEST12345@GMAIL.COM', N'test12345@gmail.com', N'TEST12345@GMAIL.COM', 1, N'AQAAAAEAACcQAAAAEEp+0rRoii15GHv2SlqGgoEt8iLiYREmjlqk/ID3BY8U8a4FKVIYFgBGZhl6qeR3qA==', N'A4TAR3Q74LX5RVGCCD5R37UXE2HVIA45', N'f346f51a-90d5-48a8-b930-e387489b4b7e', N'82455632852', 0, 0, NULL, 1, 0)
+GO
+SET IDENTITY_INSERT [dbo].[locations] ON 
+
+INSERT [dbo].[locations] ([Id], [Name], [Descriptions]) VALUES (2, N'kathmandu', N'abc')
+SET IDENTITY_INSERT [dbo].[locations] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Projects] ON 
+
+INSERT [dbo].[Projects] ([Id], [Name], [Description], [Status], [StartTime], [Manager]) VALUES (1, N'Testing', N'this is test', N'0', NULL, NULL)
+INSERT [dbo].[Projects] ([Id], [Name], [Description], [Status], [StartTime], [Manager]) VALUES (2, N'Hari Shrestha', N'abc', N'1', CAST(N'2021-12-29T08:02:26.107' AS DateTime), NULL)
+INSERT [dbo].[Projects] ([Id], [Name], [Description], [Status], [StartTime], [Manager]) VALUES (3, N'rajan Jaishwal', N'', N'1', CAST(N'2022-01-07T06:41:50.590' AS DateTime), N'abc')
+INSERT [dbo].[Projects] ([Id], [Name], [Description], [Status], [StartTime], [Manager]) VALUES (13, N'Atcr', N'str', N'Active', NULL, N'abc')
+INSERT [dbo].[Projects] ([Id], [Name], [Description], [Status], [StartTime], [Manager]) VALUES (14, N'Atcr', N'str', N'Active', NULL, N'abc')
+INSERT [dbo].[Projects] ([Id], [Name], [Description], [Status], [StartTime], [Manager]) VALUES (15, N'txt', N'str', N'Active', CAST(N'2022-01-13T11:08:42.593' AS DateTime), N'txt')
+SET IDENTITY_INSERT [dbo].[Projects] OFF
+GO
+INSERT [dbo].[roles] ([Id], [Name]) VALUES (1, N'y')
+GO
+SET IDENTITY_INSERT [dbo].[UserDetails] ON 
+
+INSERT [dbo].[UserDetails] ([Id], [FullName], [PhoneNumber], [Email], [Comment], [UserId], [DateofBirth], [ImagePath], [Gender], [ForgetPasswordCode], [ForgetPasswordCodeExpirtyDate], [Status], [Address]) VALUES (5, N'Guddu', N'9818649533', N'Guddu2055@gmail.com', N'User Created FROM API', N'84d09814-a9ff-4e76-9de1-0ab0c5ef8269', NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+INSERT [dbo].[UserDetails] ([Id], [FullName], [PhoneNumber], [Email], [Comment], [UserId], [DateofBirth], [ImagePath], [Gender], [ForgetPasswordCode], [ForgetPasswordCodeExpirtyDate], [Status], [Address]) VALUES (11, N'Ritesh MANDAL1', N'99999999099999', N'ritesh234@gmail.com', N'User Created FROM API', N'ce942cd8-e683-4909-9815-ca108f3ca1ea', NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+INSERT [dbo].[UserDetails] ([Id], [FullName], [PhoneNumber], [Email], [Comment], [UserId], [DateofBirth], [ImagePath], [Gender], [ForgetPasswordCode], [ForgetPasswordCodeExpirtyDate], [Status], [Address]) VALUES (12, N'test', N'9852613476', N'test123@gmail.com', N'User Created FROM API', N'9aa66646-c46a-4bca-a8ad-6af9710c1e03', NULL, NULL, NULL, NULL, NULL, NULL, N'HOME')
+INSERT [dbo].[UserDetails] ([Id], [FullName], [PhoneNumber], [Email], [Comment], [UserId], [DateofBirth], [ImagePath], [Gender], [ForgetPasswordCode], [ForgetPasswordCodeExpirtyDate], [Status], [Address]) VALUES (13, N'TAT123', N'82455632852', N'test12345@gmail.com', N'User Created FROM API', N'fafe57f0-a730-47ab-b2e8-0a671e8e165d', NULL, NULL, NULL, NULL, NULL, NULL, N'hOME')
+INSERT [dbo].[UserDetails] ([Id], [FullName], [PhoneNumber], [Email], [Comment], [UserId], [DateofBirth], [ImagePath], [Gender], [ForgetPasswordCode], [ForgetPasswordCodeExpirtyDate], [Status], [Address]) VALUES (14, N'Dev', N'9818654995', N'dev12345@gmail.com', N'User Created FROM API', N'315f9427-8ddd-469a-b583-7079bf30365e', NULL, NULL, NULL, NULL, NULL, NULL, N'tinkune')
+INSERT [dbo].[UserDetails] ([Id], [FullName], [PhoneNumber], [Email], [Comment], [UserId], [DateofBirth], [ImagePath], [Gender], [ForgetPasswordCode], [ForgetPasswordCodeExpirtyDate], [Status], [Address]) VALUES (15, N'Guddu', N'9818654995', N'Guddumandal2055@gmail.com', N'User Created FROM API', N'c73b2f4f-619a-4eee-ab9d-8893ce7f0b4a', NULL, NULL, NULL, NULL, NULL, NULL, N'tinkune')
+INSERT [dbo].[UserDetails] ([Id], [FullName], [PhoneNumber], [Email], [Comment], [UserId], [DateofBirth], [ImagePath], [Gender], [ForgetPasswordCode], [ForgetPasswordCodeExpirtyDate], [Status], [Address]) VALUES (16, N'Guddu', N'9818649533', N'guddumandal9533@gmail.com', N'User Created FROM API', N'2833fd27-fc87-4530-b8bb-bbf518fcc63b', NULL, NULL, NULL, NULL, NULL, NULL, N'Tinkune')
+SET IDENTITY_INSERT [dbo].[UserDetails] OFF
+GO
+SET IDENTITY_INSERT [dbo].[WorkLogs] ON 
+
+INSERT [dbo].[WorkLogs] ([Id], [Project_Id], [Work_Id], [Start_date], [End_date], [Create_date], [Comments], [UserDetail_Id], [Location_Id]) VALUES (1, 3, 4, CAST(N'2022-01-14T06:26:29.6600000' AS DateTime2), CAST(N'2022-01-14T06:26:29.6600000' AS DateTime2), CAST(N'2022-01-14T06:26:29.6600000' AS DateTime2), N'abc', NULL, NULL)
+INSERT [dbo].[WorkLogs] ([Id], [Project_Id], [Work_Id], [Start_date], [End_date], [Create_date], [Comments], [UserDetail_Id], [Location_Id]) VALUES (2, 1, 4, CAST(N'2022-01-14T07:22:52.9100000' AS DateTime2), CAST(N'2022-01-14T07:22:52.9100000' AS DateTime2), CAST(N'2022-01-14T07:22:52.9100000' AS DateTime2), N'', NULL, NULL)
+INSERT [dbo].[WorkLogs] ([Id], [Project_Id], [Work_Id], [Start_date], [End_date], [Create_date], [Comments], [UserDetail_Id], [Location_Id]) VALUES (3, 3, 4, CAST(N'2022-01-14T06:26:29.6600000' AS DateTime2), CAST(N'2022-01-14T06:26:29.6600000' AS DateTime2), CAST(N'2022-01-14T06:26:29.6600000' AS DateTime2), N'abc', NULL, NULL)
+INSERT [dbo].[WorkLogs] ([Id], [Project_Id], [Work_Id], [Start_date], [End_date], [Create_date], [Comments], [UserDetail_Id], [Location_Id]) VALUES (4, 3, 4, CAST(N'2022-01-14T06:26:29.6600000' AS DateTime2), CAST(N'2022-01-14T06:26:29.6600000' AS DateTime2), CAST(N'2022-01-14T06:26:29.6600000' AS DateTime2), N'abc', NULL, NULL)
+INSERT [dbo].[WorkLogs] ([Id], [Project_Id], [Work_Id], [Start_date], [End_date], [Create_date], [Comments], [UserDetail_Id], [Location_Id]) VALUES (5, 1, 4, CAST(N'2022-01-14T07:22:52.9100000' AS DateTime2), CAST(N'2022-01-14T07:22:52.9100000' AS DateTime2), CAST(N'2022-01-14T07:22:52.9100000' AS DateTime2), N'r', NULL, NULL)
+INSERT [dbo].[WorkLogs] ([Id], [Project_Id], [Work_Id], [Start_date], [End_date], [Create_date], [Comments], [UserDetail_Id], [Location_Id]) VALUES (6, 3, 5, CAST(N'2022-01-14T11:03:00.7590000' AS DateTime2), CAST(N'2022-01-14T11:03:00.7590000' AS DateTime2), CAST(N'2022-01-14T11:03:00.7590000' AS DateTime2), N'', NULL, NULL)
+INSERT [dbo].[WorkLogs] ([Id], [Project_Id], [Work_Id], [Start_date], [End_date], [Create_date], [Comments], [UserDetail_Id], [Location_Id]) VALUES (7, 1, 5, CAST(N'2022-01-14T11:03:00.7590000' AS DateTime2), CAST(N'2022-01-14T11:03:00.7590000' AS DateTime2), CAST(N'2022-01-14T11:03:00.7590000' AS DateTime2), N'', NULL, NULL)
+INSERT [dbo].[WorkLogs] ([Id], [Project_Id], [Work_Id], [Start_date], [End_date], [Create_date], [Comments], [UserDetail_Id], [Location_Id]) VALUES (8, 1, 5, CAST(N'2022-01-31T10:37:43.1160000' AS DateTime2), CAST(N'2022-01-31T10:37:43.1160000' AS DateTime2), CAST(N'2022-01-31T10:37:43.1160000' AS DateTime2), N'strefewfewfeing', 5, NULL)
+INSERT [dbo].[WorkLogs] ([Id], [Project_Id], [Work_Id], [Start_date], [End_date], [Create_date], [Comments], [UserDetail_Id], [Location_Id]) VALUES (9, 3, 4, CAST(N'2022-02-02T07:07:09.2260000' AS DateTime2), CAST(N'2022-02-02T07:07:09.2260000' AS DateTime2), CAST(N'2022-02-02T07:07:09.2270000' AS DateTime2), N'strifewfewfeg', 5, 2)
+SET IDENTITY_INSERT [dbo].[WorkLogs] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Works] ON 
+
+INSERT [dbo].[Works] ([Id], [Task_Name], [Description], [ProjectId], [StaffId], [StartTime], [Create_Date]) VALUES (4, N'web', N'abcd', 1, 5, CAST(N'2022-01-12T07:49:46.753' AS DateTime), CAST(N'2022-01-12T07:49:46.7530000' AS DateTime2))
+INSERT [dbo].[Works] ([Id], [Task_Name], [Description], [ProjectId], [StaffId], [StartTime], [Create_Date]) VALUES (5, N'string', N'string', 1, 5, CAST(N'2022-01-13T06:16:34.420' AS DateTime), CAST(N'2022-01-13T06:16:34.4190000' AS DateTime2))
+INSERT [dbo].[Works] ([Id], [Task_Name], [Description], [ProjectId], [StaffId], [StartTime], [Create_Date]) VALUES (6, N'tack', N'str', 1, 5, CAST(N'2022-01-14T07:20:51.153' AS DateTime), CAST(N'2022-01-14T07:20:51.1540000' AS DateTime2))
+INSERT [dbo].[Works] ([Id], [Task_Name], [Description], [ProjectId], [StaffId], [StartTime], [Create_Date]) VALUES (7, N'tack', N'sr', 1, 5, CAST(N'2022-01-14T07:20:51.153' AS DateTime), CAST(N'2022-01-14T07:20:51.1540000' AS DateTime2))
+INSERT [dbo].[Works] ([Id], [Task_Name], [Description], [ProjectId], [StaffId], [StartTime], [Create_Date]) VALUES (8, N'tack', N'sr', 1, 5, CAST(N'2022-01-14T07:20:51.153' AS DateTime), CAST(N'2022-01-14T07:20:51.1540000' AS DateTime2))
+INSERT [dbo].[Works] ([Id], [Task_Name], [Description], [ProjectId], [StaffId], [StartTime], [Create_Date]) VALUES (9, N'rat', N'cool', 1, 5, CAST(N'2022-01-20T06:13:23.070' AS DateTime), CAST(N'2022-01-20T06:13:23.0690000' AS DateTime2))
+SET IDENTITY_INSERT [dbo].[Works] OFF
+GO
+ALTER TABLE [dbo].[AspNetRoleClaims]  WITH CHECK ADD  CONSTRAINT [FK_AspNetRoleClaims_AspNetRoles_RoleId] FOREIGN KEY([RoleId])
+REFERENCES [dbo].[AspNetRoles] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[AspNetRoleClaims] CHECK CONSTRAINT [FK_AspNetRoleClaims_AspNetRoles_RoleId]
+GO
+ALTER TABLE [dbo].[AspNetUserClaims]  WITH CHECK ADD  CONSTRAINT [FK_AspNetUserClaims_AspNetUsers_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[AspNetUsers] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[AspNetUserClaims] CHECK CONSTRAINT [FK_AspNetUserClaims_AspNetUsers_UserId]
+GO
+ALTER TABLE [dbo].[AspNetUserLogins]  WITH CHECK ADD  CONSTRAINT [FK_AspNetUserLogins_AspNetUsers_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[AspNetUsers] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[AspNetUserLogins] CHECK CONSTRAINT [FK_AspNetUserLogins_AspNetUsers_UserId]
+GO
+ALTER TABLE [dbo].[AspNetUserRoles]  WITH CHECK ADD  CONSTRAINT [FK_AspNetUserRoles_AspNetRoles_RoleId] FOREIGN KEY([RoleId])
+REFERENCES [dbo].[AspNetRoles] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[AspNetUserRoles] CHECK CONSTRAINT [FK_AspNetUserRoles_AspNetRoles_RoleId]
+GO
+ALTER TABLE [dbo].[AspNetUserRoles]  WITH CHECK ADD  CONSTRAINT [FK_AspNetUserRoles_AspNetUsers_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[AspNetUsers] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[AspNetUserRoles] CHECK CONSTRAINT [FK_AspNetUserRoles_AspNetUsers_UserId]
+GO
+ALTER TABLE [dbo].[AspNetUserTokens]  WITH CHECK ADD  CONSTRAINT [FK_AspNetUserTokens_AspNetUsers_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[AspNetUsers] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[AspNetUserTokens] CHECK CONSTRAINT [FK_AspNetUserTokens_AspNetUsers_UserId]
+GO
+ALTER TABLE [dbo].[UserDetails]  WITH CHECK ADD  CONSTRAINT [FK_UserDetails_AspNetUsers_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[AspNetUsers] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[UserDetails] CHECK CONSTRAINT [FK_UserDetails_AspNetUsers_UserId]
+GO
+ALTER TABLE [dbo].[WorkLogs]  WITH CHECK ADD FOREIGN KEY([Location_Id])
+REFERENCES [dbo].[locations] ([Id])
+GO
+ALTER TABLE [dbo].[WorkLogs]  WITH CHECK ADD FOREIGN KEY([Project_Id])
+REFERENCES [dbo].[Projects] ([Id])
+GO
+ALTER TABLE [dbo].[WorkLogs]  WITH CHECK ADD FOREIGN KEY([UserDetail_Id])
+REFERENCES [dbo].[UserDetails] ([Id])
+GO
+ALTER TABLE [dbo].[WorkLogs]  WITH CHECK ADD FOREIGN KEY([Work_Id])
+REFERENCES [dbo].[Works] ([Id])
+GO
+ALTER TABLE [dbo].[Works]  WITH CHECK ADD FOREIGN KEY([ProjectId])
+REFERENCES [dbo].[Projects] ([Id])
+GO
+ALTER TABLE [dbo].[Works]  WITH CHECK ADD FOREIGN KEY([StaffId])
+REFERENCES [dbo].[UserDetails] ([Id])
+GO
+USE [master]
+GO
+ALTER DATABASE [WorklogDB] SET  READ_WRITE 
+GO
